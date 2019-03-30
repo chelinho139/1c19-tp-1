@@ -1,6 +1,15 @@
 version: '2'
 
 services:
+
+    # intento de agregar lo de node, creo q tiene q ir nombre img
+    # node-server:
+    #     image: node:8
+    #     volumes:
+    #         - .:/usr/src/app
+    #     working_dir: /js
+
+
     nginx:
         image: nginx:1.15.8
         ports:

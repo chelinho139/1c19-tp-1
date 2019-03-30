@@ -3,7 +3,7 @@ const app = express()
 const port = 3000
 
 const path= require('path');
-
+const http = require('http');
 
 
 //Pueden probarlo con archivos chicos y con archivos grandes
@@ -69,10 +69,44 @@ app.get('/static',(req, res) => {
 	res.sendFile(path.join(__dirname, 'doritos.jpg'));
 });
 
+
 //caso 5
+app.get('/proxy',(req, res) => {
 
+	getTimeout().then((data)=>{
+		res.status(200);
+		res.send(data);	
+	})
+});
 
+const getTimeout = function(){
+		return new Promise((resolve,reject)=>{
+		var options = {
+			hostname: 'localhost',
+			port: 3000,
+			path: '/timeout',
+			method: 'GET'
+		};
 
+		var req = http.request(options, function(res) {
+
+			var body = '';
+
+			res.on('data', function (chunk) {
+				body = body + chunk;
+			});
+
+			res.on('end',function(){
+				resolve(body);
+			});
+		});
+		req.end();
+		req.on('error', function(e) {
+			console.error(e);
+			reject(e)
+		});
+	});
+}
 
 
 

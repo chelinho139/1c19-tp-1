@@ -1,11 +1,12 @@
-from flask import Flask,send_from_directory,requests
+from flask import Flask,send_from_directory
+import requests
 import time
 import datetime
 
-app = Flask(__name__,static_url_path='static')
+app = Flask(__name__, static_url_path='static')
 
 
-SLEEP_TIME = 2000;
+SLEEP_TIME = 2000
 
 
 def intensive_op(foo):
@@ -28,25 +29,23 @@ def time_out():
 #CASE 3
 @app.route("/intensive",methods=["GET"])
 def intensive():
-  running=True;
-	oldTime = datetime.datetime.now()
-	newTime
-	delta = 0
+  old_time = datetime.datetime.now()
+  delta = 0
   foo = 0
-	counter = 0
+  counter = 0
   while counter < SLEEP_TIME:
     intensive_op(foo)
-    newTime = datetime.datetime.now()
-    delta = newTime.date() - oldTime.date()
-    counter =+ delta
-    oldTime = newTime
+    new_time = datetime.datetime.now()
+    delta = new_time.date() - old_time.date()
+    counter = counter + delta
+    oldTime = new_time
   return "OK"
 
 
 #CASE 4
 @app.route("/static",methods=["GET"])
 def return_static_file():
-  return app.send_from_directory("doritos.jpg")
+  return send_from_directory("doritos.jpg")
 
 
 

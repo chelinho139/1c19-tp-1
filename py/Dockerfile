@@ -1,4 +1,4 @@
-FROM python:latest
+FROM python:2.7.10
 
 RUN mkdir /as
 WORKDIR /as
@@ -9,6 +9,6 @@ RUN pip install -r requirements.txt
 
 COPY / /as/src
 
-EXPOSE 3000
+EXPOSE 4000
 
-CMD [ "gunicorn", "--chdir", "src", "--pythonpath", "/as/src", "llevame.app:app", "-b 0.0.0.0:3000" ]
+CMD [ "gunicorn", "--chdir", "src", "--pythonpath", "/as/src", "app:app", "-b", ":4000" ]

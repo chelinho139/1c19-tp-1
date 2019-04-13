@@ -4,6 +4,8 @@ import time
 
 app = Flask(__name__, static_url_path='')
 
+HOST = '0.0.0.0'
+PORT = 4000
 
 SLEEP_TIME_IN_SECONDS = 2
 INTENSIVE_COUNTER = 2000
@@ -23,6 +25,7 @@ def healt_check():
 #CASE 2
 @app.route("/timeout", methods=["GET"])
 def time_out():
+  print("GET /timeout")
   time.sleep(SLEEP_TIME_IN_SECONDS)
   return "OK"
 
@@ -30,6 +33,7 @@ def time_out():
 #CASE 3
 @app.route("/intensive", methods=["GET"])
 def intensive():
+  print("GET /intensive")
   old_time = time.time()
   delta = 0
   foo = 0
@@ -49,6 +53,7 @@ def intensive():
 #CASE 4
 @app.route("/static", methods=["GET"])
 def return_static_file():
+  print("GET /static")
   return send_from_directory("static", "doritos.jpg")
 
 
@@ -56,14 +61,15 @@ def return_static_file():
 #CASE 5
 @app.route("/proxy", methods=["GET"])
 def proxy():
-  print("GET /timeout")
-  res = requests.get("http://localhost:5000/timeout")
+  print("GET /proxy")
+  url = 'http://'+HOST+':'+str(PORT)+'/timeout'
+  res = requests.get(url)
   if res.status_code == 200:
     return "OK"
   return "NOT OK"
 
 
-app.run()
 
-
+if __name__ == "__main__":
+  app.run(host=HOST, port=PORT)
 

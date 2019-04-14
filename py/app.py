@@ -46,7 +46,7 @@ def intensive():
     print("delta {}".format(counter))
     counter = counter + delta
     print("counter {}".format(counter))
-    oldTime = new_time
+    old_time = new_time
   return "OK"
 
 

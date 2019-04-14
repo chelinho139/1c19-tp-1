@@ -5,15 +5,11 @@ services:
         build: ./js
         ports:
             - "3000:3000"
-        volumes:
-            - ./js:/usr/src/app
 
     gunicorn:
         build: ./py
         ports:
             - "4000:4000"
-        volumes:
-            - ./py:/usr/src/app
 
     nginx:
         image: nginx:1.15.8

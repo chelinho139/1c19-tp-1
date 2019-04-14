@@ -3,7 +3,7 @@ WORKDIR /usr/src/app
 COPY package*.json ./
 
 RUN npm install
-COPY app.js ./
+COPY app.js doritos.jpg ./
 
 EXPOSE 3000
 

@@ -20,7 +20,7 @@ def intensive_op(foo):
 #CASE 1
 @app.route("/", methods=["GET"])
 def healt_check():
-  return 'Doritos Dev - Node Test Server'
+  return 'Doritos Dev - Python Test Server'
 
 #CASE 2
 @app.route("/timeout", methods=["GET"])

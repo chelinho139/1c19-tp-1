@@ -1,0 +1,53 @@
+config:
+  environments:
+    node:
+      target: 'http://localhost:5555/node'
+      plugins:
+        statsd:
+          host: localhost
+          port: 8125
+          prefix: "artillery-node"
+    gunicorn:
+      target: 'http://localhost:5555/gunicorn'
+      plugins:
+        statsd:
+          host: localhost
+          port: 8125
+          prefix: "artillery-gunicorn"
+
+  pool: 50 # All HTTP requests from all virtual users will be sent over the same connections
+
+  phases:
+    - name: Plain
+      duration: 30
+      arrivalRate: 30
+
+    - name: Increasex2
+      duration: 15
+      arrivalRate: 30
+      rampTo: 60
+
+    - name: Increasex4
+      duration: 15
+      arrivalRate: 60
+      rampTo: 120
+
+    - name: Plainx4
+      duration: 30
+      arrivalRate: 120
+
+    - name: Increasex8
+      duration: 15
+      arrivalRate: 120
+      rampTo: 240
+      
+    - name: Increasex16
+      duration: 15
+      arrivalRate: 240
+      rampTo: 480
+
+scenarios:
+  - name: Curves (/ping)
+    flow:
+      - get:
+          url: '/ping'

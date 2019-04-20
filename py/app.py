@@ -8,13 +8,13 @@ HOST = '0.0.0.0'
 PORT = 4000
 
 SLEEP_TIME_IN_SECONDS = 2
-INTENSIVE_COUNTER = 2000
+INTENSIVE_COUNTER = 2
 
 
 def intensive_op(foo):
   print("foo {}".format(foo))
   foo = foo + 1
-  return foo*foo
+  return foo
 
 
 #CASE 1
@@ -46,12 +46,12 @@ def intensive():
   counter = 0
   while counter < INTENSIVE_COUNTER:
     #do anything calculate
-    intensive_op(foo)
+    foo=intensive_op(foo)
     new_time = time.time()
     delta = new_time - old_time
-    print("delta {}".format(counter))
+    # print("delta {}".format(counter))
     counter = counter + delta
-    print("counter {}".format(counter))
+    # print("counter {}".format(counter))
     old_time = new_time
   return "OK"
 

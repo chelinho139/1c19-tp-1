@@ -22,6 +22,12 @@ def intensive_op(foo):
 def healt_check():
   return 'Doritos Dev - Python Test Server'
 
+#CASE 1-bis
+@app.route("/ping", methods=["GET"])
+def ping():
+  return 'OK'
+
+
 #CASE 2
 @app.route("/timeout", methods=["GET"])
 def time_out():

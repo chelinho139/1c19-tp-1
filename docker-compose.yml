@@ -4,7 +4,7 @@ services:
     node:
         build: ./js
         ports:
-            - "3000:3000"
+            - "3000"
 
     gunicorn:
         build: ./py
